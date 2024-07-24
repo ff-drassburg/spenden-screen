@@ -1,0 +1,59 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "animate.css";
+
+img.ffd-logo {
+    width: auto;
+    max-height: 40px;
+}
+@media (min-width: 992px) {
+    img.ffd-logo {
+        max-height: 56px;
+    }
+}
+
+.buildingblocks {
+    margin: 64px 0;
+}
+.buildingblocks h3 {
+    margin-top: 42px;
+}
+ul.grid {
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-gap: 24px;
+    list-style-type: none;
+}
+ul.grid li {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.75rem;
+    font-weight: 200;
+    text-align: center;
+}
+ul.grid.gold li {
+    background-color: #ceb13f;
+}
+ul.grid.silver li {
+    background-color: #D0D0D0;
+}
+ul.grid.bronze li {
+    background-color: #c7964c;
+}
+
+/* @keyframes wipe-enter {
+	0% {
+		transform: scale(0, .025);
+	}
+	50% {
+		transform: scale(1, .025);
+	}
+}
+@media (prefers-reduced-motion: no-preference) {
+    ul.grid li {
+      animation-name: wipe-enter;
+      animation-duration: 1s;
+    }
+  } */
