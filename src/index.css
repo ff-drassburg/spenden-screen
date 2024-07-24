@@ -1,5 +1,4 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
-@import "animate.css";
 
 img.ffd-logo {
     width: auto;
@@ -12,10 +11,10 @@ img.ffd-logo {
 }
 
 .buildingblocks {
-    margin: 64px 0;
+    margin: 150px auto;
 }
 .buildingblocks h3 {
-    margin-top: 42px;
+    margin-top: 64px;
 }
 ul.grid {
     padding: 0;
@@ -32,6 +31,7 @@ ul.grid li {
     font-size: 1.75rem;
     font-weight: 200;
     text-align: center;
+    border-radius: 5px;
 }
 ul.grid.gold li {
     background-color: #ceb13f;
@@ -43,17 +43,30 @@ ul.grid.bronze li {
     background-color: #c7964c;
 }
 
-/* @keyframes wipe-enter {
-	0% {
-		transform: scale(0, .025);
-	}
-	50% {
-		transform: scale(1, .025);
-	}
+.zoom-in-out-box {
+    animation: zoom-in-zoom-out 3s ease;
 }
-@media (prefers-reduced-motion: no-preference) {
-    ul.grid li {
-      animation-name: wipe-enter;
-      animation-duration: 1s;
+@keyframes zoom-in-zoom-out {
+    0% {
+        scale: 1 1;
     }
-  } */
+    25% {
+        top: calc(50% + var(--scrollY,0));
+        left: 50%;
+        margin-left: -208px;
+        margin-top: -50px;
+        scale: 4 4;
+        box-shadow: 0 0 10px 10px white;
+    }
+    75% {
+        top: calc(50% + var(--scrollY,0));
+        left: 50%;
+        margin-left: -208px;
+        margin-top: -50px;
+        scale: 4 4;
+        box-shadow: 0 0 10px 10px white;
+    }
+    100% {
+        scale: 1 1;
+      }
+  }

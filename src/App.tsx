@@ -2,71 +2,98 @@ import { useEffect, useState } from "react";
 
 function App() {
 
-  const [donates, setDonates] = useState<{ 
+  const [donates, setDonates] = useState<{
     "gold"?: string[],
     "silver"?: string[],
     "bronze"?: string[]
   }>({});
 
   const getData = async () => {
-    fetch("https://raw.githubusercontent.com/ff-drassburg/spenden/main/src/data/")
+    fetch("https://raw.githubusercontent.com/ff-drassburg/spenden/main/src/data/donates.json")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setDonates(data);
+
+        setTimeout(() => {
+          animate(Array.from(document.getElementsByTagName("li")));
+        }, 1000);
       })
+  };
+  const animate = (elementsLeft: HTMLLIElement[]) => {
+
+    if (elementsLeft.length == 0) {
+      window.scrollTo({ left: 0, top: 0, behavior: "smooth" })
+      getData();
+      return;
+    }
+
+    var element = elementsLeft[0];
+    var rect = element.getBoundingClientRect();
+
+    var newElement = element.cloneNode(true) as HTMLElement;
+    newElement.classList.add("zoom-in-out-box");
+    newElement.style.position = "absolute";
+
+    if ((rect.top + rect.height + 24) > document.documentElement.clientHeight) {
+      var scrollByY = rect.top + rect.height + 24 - document.documentElement.clientHeight;
+      window.scrollBy({ left: 0, top: scrollByY, behavior: "smooth" });
+      newElement.style.setProperty('--scrollY', window.scrollY + scrollByY + "px");
+    } else {
+      newElement.style.setProperty('--scrollY', window.scrollY + "px");
+    }
+
+    newElement.style.top = (rect.y + window.scrollY) + "px";
+    newElement.style.left = rect.x + "px";
+    newElement.style.width = element.clientWidth + "px";
+
+    element.parentElement?.appendChild(newElement);
+
+    setTimeout(() => {
+      element.parentElement?.removeChild(newElement);
+      setTimeout(() => {
+        animate(elementsLeft.slice(1));
+      }, 1000);
+    }, 3000);
   };
 
   useEffect(() => {
     getData();
-    const intervalCall = setInterval(() => {
-      getData();
-    }, 10000);
-    return () => {
-      clearInterval(intervalCall);
-    };
   }, []);
 
   return (
-    <div className="container">
-      <header className="py-3 mb-4 border-bottom" >
-        <nav>
-          <img alt="" src={require("./images/logo_of_Drassburg_400.png")} className="ffd-logo" />
-        </nav>
+    <>
+      <header className="py-3 mb-4 fixed-top border-bottom" style={{ backgroundColor: "#fff" }}>
+        <div className="container">
+          <nav className="navbar">
+            <img alt="" src={require("./images/logo_of_Drassburg_400.png")} className="ffd-logo" />
+            <h2 style={{ marginBottom: "-26px" }}>Vielen Dank für die bereits erhaltenen Spenden</h2>
+          </nav>
+        </div>
       </header>
-      
-      <div>
-        <h2>Bausteinaktion für den Zu- und Umbaus des Feuerwehrhauses</h2>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-      </div>
 
-      <div className="buildingblocks">
-        <h2>Vielen Dank für die bereits erhaltene Spenden</h2>
-        
+      <div className="container buildingblocks">
         <h3>Bausteine Gold</h3>
-
         <ul className="grid gold">
-          { donates["gold"]?.map((donate: string) => (
-            <li>{donate}</li>
+          {donates["gold"]?.map((donate: string, index: number) => (
+            <li key={"gold-" + index}>{donate}</li>
           ))}
         </ul>
 
         <h3>Bausteine Silber</h3>
         <ul className="grid silver">
-        { donates["silver"]?.map((donate: string) => (
-            <li>{donate}</li>
+          {donates["silver"]?.map((donate: string, index: number) => (
+            <li key={"silver-" + index}>{donate}</li>
           ))}
         </ul>
 
         <h3>Bausteine Bronze</h3>
         <ul id="bronze" className="grid bronze">
-        { donates["bronze"]?.map((donate: string) => (
-            <li>{donate}</li>
+          {donates["bronze"]?.map((donate: string, index: number) => (
+            <li key={"bronze-" + index}>{donate}</li>
           ))}
         </ul>
       </div>
-    </div>
+    </>
   );
 }
 
