@@ -4,6 +4,7 @@ img.ffd-logo {
     width: auto;
     max-height: 40px;
 }
+
 @media (min-width: 992px) {
     img.ffd-logo {
         max-height: 56px;
@@ -13,9 +14,11 @@ img.ffd-logo {
 .buildingblocks {
     margin-top: 150px;
 }
+
 .buildingblocks h3 {
     margin-top: 64px;
 }
+
 ul.grid {
     padding: 0;
     display: grid;
@@ -23,6 +26,7 @@ ul.grid {
     grid-gap: 24px;
     list-style-type: none;
 }
+
 ul.grid li {
     height: 100px;
     display: flex;
@@ -33,12 +37,15 @@ ul.grid li {
     text-align: center;
     border-radius: 5px;
 }
+
 ul.grid.gold li {
     background-color: #ceb13f;
 }
+
 ul.grid.silver li {
     background-color: #D0D0D0;
 }
+
 ul.grid.bronze li {
     background-color: #c7964c;
 }
@@ -46,27 +53,31 @@ ul.grid.bronze li {
 .zoom-in-out-box {
     animation: zoom-in-zoom-out 3s ease;
 }
+
 @keyframes zoom-in-zoom-out {
     0% {
         scale: 1 1;
     }
+
     25% {
-        top: calc(50% + var(--scrollY,0));
+        top: calc(50% + var(--scrollY, 0));
         left: 50%;
         margin-left: -208px;
         margin-top: -50px;
         scale: 4 4;
         box-shadow: 0 0 10px 10px white;
     }
+
     75% {
-        top: calc(50% + var(--scrollY,0));
+        top: calc(50% + var(--scrollY, 0));
         left: 50%;
         margin-left: -208px;
         margin-top: -50px;
         scale: 4 4;
         box-shadow: 0 0 10px 10px white;
     }
+
     100% {
         scale: 1 1;
-      }
-  }
+    }
+}

@@ -66,32 +66,45 @@ function App() {
         <div className="container">
           <nav className="navbar">
             <img alt="" src={require("./images/logo_of_Drassburg_400.png")} className="ffd-logo" />
-            <h2 style={{ marginBottom: "-26px" }}>Vielen Dank für die bereits erhaltenen Spenden</h2>
+            <h2 style={{ marginBottom: "-26px" }}>Vielen Dank für alle bereits erhaltenen Spenden</h2>
           </nav>
         </div>
       </header>
 
       <div className="container buildingblocks">
-        <h3>Bausteine Gold</h3>
-        <ul className="grid gold">
-          {donates["gold"]?.map((donate: string, index: number) => (
-            <li key={"gold-" + index}>{donate}</li>
-          ))}
-        </ul>
+        {donates["gold"] !== undefined &&
+          <>
+            <h3>Bausteine Gold</h3>
+            <ul className="grid gold">
+              {donates["gold"]?.map((donate: string, index: number) => (
+                <li key={"gold-" + index}>{donate}</li>
+              ))}
+            </ul>
+          </>
+        }
 
-        <h3>Bausteine Silber</h3>
-        <ul className="grid silver">
-          {donates["silver"]?.map((donate: string, index: number) => (
-            <li key={"silver-" + index}>{donate}</li>
-          ))}
-        </ul>
+        {donates["silver"] !== undefined &&
+          <>
+            <h3>Bausteine Silber</h3>
+            <ul className="grid silver">
+              {donates["silver"]?.map((donate: string, index: number) => (
+                <li key={"silver-" + index}>{donate}</li>
+              ))}
+            </ul>
+          </>
+        }
 
-        <h3>Bausteine Bronze</h3>
-        <ul id="bronze" className="grid bronze">
-          {donates["bronze"]?.map((donate: string, index: number) => (
-            <li key={"bronze-" + index}>{donate}</li>
-          ))}
-        </ul>
+        {donates["bronze"] !== undefined &&
+          <>
+            <h3>Bausteine Bronze</h3>
+            <ul id="bronze" className="grid bronze">
+              {donates["bronze"]?.map((donate: string, index: number) => (
+                <li key={"bronze-" + index}>{donate}</li>
+              ))}
+            </ul>
+          </>
+        }
+
       </div>
     </>
   );
