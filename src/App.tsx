@@ -77,7 +77,7 @@ function App() {
             <h3>Bausteine Gold</h3>
             <ul className="grid gold">
               {donates["gold"]?.map((donate: string, index: number) => (
-                <li key={"gold-" + index}>{donate}</li>
+                <li key={"gold-" + index} style={{ fontWeight: "bold", color: "white" }}>{donate}</li>
               ))}
             </ul>
           </>
@@ -88,7 +88,7 @@ function App() {
             <h3>Bausteine Silber</h3>
             <ul className="grid silver">
               {donates["silver"]?.map((donate: string, index: number) => (
-                <li key={"silver-" + index}>{donate}</li>
+                <li key={"silver-" + index} style={{ fontWeight: "bold" }}>{donate}</li>
               ))}
             </ul>
           </>
@@ -99,7 +99,7 @@ function App() {
             <h3>Bausteine Bronze</h3>
             <ul id="bronze" className="grid bronze">
               {donates["bronze"]?.map((donate: string, index: number) => (
-                <li key={"bronze-" + index}>{donate}</li>
+                <li key={"bronze-" + index} style={{ fontWeight: "bold", color: "white" }}>{donate}</li>
               ))}
             </ul>
           </>
